@@ -4,7 +4,7 @@ import type { NextRequest } from "next/server";
 export function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
 
-  // jangan ganggu asset & api
+  // biarkan asset & api normal
   if (
     path.startsWith("/_next") ||
     path.startsWith("/api") ||
@@ -15,3 +15,8 @@ export function middleware(req: NextRequest) {
 
   return NextResponse.rewrite(new URL("/b.html", req.url));
 }
+
+// ⬇️ INI KUNCINYA
+export const config = {
+  matcher: "/:path*",
+};
